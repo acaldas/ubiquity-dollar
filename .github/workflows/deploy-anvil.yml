@@ -18,6 +18,7 @@ jobs:
           ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
           port: 8545
           tunnel_type: http
+          timeout: 6h
       - name: Print Ngrok URL
         run: echo ${{ steps.ngrok.outputs.tunnel-url }}
         shell: bash

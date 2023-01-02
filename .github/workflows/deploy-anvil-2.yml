@@ -1,0 +1,16 @@
+on: workflow_dispatch
+
+name: Deploy Anvil
+
+jobs:
+  deploy-anvil:
+    name: Deploy Anvil
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - name: Run anvil
+        run: anvil
+        shell: bash

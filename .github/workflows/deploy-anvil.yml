@@ -6,6 +6,8 @@ jobs:
   deploy-anvil:
     name: Deploy Anvil
     runs-on: ubuntu-latest
+    env:
+      NGROK_TOKEN : ${{ secrets.NGROK_AUTHTOKEN }}
     steps:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -13,12 +15,10 @@ jobs:
           version: nightly
       - name: Ngrok Tunnel
         id: ngrok 
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        uses: vmactions/ngrok-tunnel@v0.0.1
         with:
-          ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
           port: 8545
-          tunnel_type: http
-          timeout: 6
+          protocol: http
       - name: Print Ngrok URL
         run: echo ${{ steps.ngrok.outputs.tunnel-url }}
         shell: bash
